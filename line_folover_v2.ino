@@ -1,7 +1,11 @@
 #include <MCP3008.h>
-#include "SoftServo.h"
 #include "Servo.h"
 #include "timer.h"
+#include "btn.h"
+
+/*
+TODO: Калибровка в eeprom, чтение калибровки при включении из eeprom
+*/
 
 // debug mode
 #define debug
@@ -9,7 +13,7 @@
 /* Режим работы:
 0 - Обычная езда
 1 - Просмотр данных переднего датчика 
-2 - TODO: Просмотр данных переднего датчика 
+2 - TODO: Просмотр данных заднего датчика 
 3 - TODO: Тест моторов
 4 - TODO: Тест импеллера
 
@@ -34,9 +38,9 @@
 #define MB2 28
 
 // MCP3008
-#define CS_PIN 6
+#define CS_PIN 7
 #define CLOCK_PIN 9
-#define MOSI_PIN 7
+#define MOSI_PIN 6
 #define MISO_PIN 8
 
 // Other
@@ -70,5 +74,6 @@ int fdata[fSensorAmo];
 // ****************************** Global objects and vars ******************************
 MCP3008 fSensor(CLOCK_PIN, MOSI_PIN, MISO_PIN, CS_PIN); // MCP3008 object (front sensor)
 Servo imp; // impeller
+WhileBtn btn(btnPin);
 
 bool foutline = false; // outline flag
