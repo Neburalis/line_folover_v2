@@ -29,25 +29,17 @@ void setup() {
 // Ждем нажатия кнопки перед началом калибровки сенсора (Частые мигания светодиодом)
 #pragma region whaitcalibrate
   uint16_t tmr = millis();
-  uint16_t btnTmr = millis();
   bool ledFlag = false;
-  bool btnFlag = false;
 
 #ifdef debug
   Serial.println(F("Whait calibration command"));
 #endif
 
   while (true) {
-    bool btnState = !digitalRead(btnPin);
-
+    
     // Обработка кнопки с антидребезгом для выхода из цикла
-    if (btnState && !btnFlag && millis() - btnTmr > 100) {
-      btnFlag = true;
+    if (btn.tick()){
       break;
-    }
-    if (!btnState && btnFlag && millis() - btnTmr > 100) {
-      btnFlag = false;
-      btnTmr = millis();
     }
 
     if (millis() - tmr >= 200) {
@@ -148,24 +140,16 @@ void setup() {
 // Ждем команды "На старт" (готовы ехать) (редкие мигания светодиодом)
 #pragma region whaitstart
   tmr = millis();
-  btnTmr = millis();
-  btnFlag = false;
 
 #ifdef debug
   Serial.println(F("Whait start command..."));
 #endif
 
   while (true) {
-    bool btnState = !digitalRead(btnPin);
 
     // Обработка кнопки с антидребезгом для выхода из цикла
-    if (btnState && !btnFlag && millis() - btnTmr > 100) {
-      btnFlag = true;
+    if (btn.tick()){
       break;
-    }
-    if (!btnState && btnFlag && millis() - btnTmr > 100) {
-      btnFlag = false;
-      btnTmr = millis();
     }
 
     if (millis() - tmr >= 800) {
