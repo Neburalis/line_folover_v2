@@ -25,23 +25,23 @@
 
 // ****************************** pin defines ******************************
 // Motor Driver
-#define STBY 29
+#define STBY 24
 #define MAP 2
 #define MBP 3
-#define MA1 22
-#define MA2 25
+#define MA1 29
+#define MA2 27
 #define MB1 26
 #define MB2 28
 
 // MCP3008
-#define CS_PIN 8
-#define CLOCK_PIN 11
-#define MOSI_PIN 9
-#define MISO_PIN 10
+#define CS_PIN 6
+#define CLOCK_PIN 9
+#define MOSI_PIN 7
+#define MISO_PIN 8
 
 // Other
 #define btnPin 4
-#define impPin 12
+#define impPin 12  
 #define ledPin 13
 
 // ****************************** Sensors ******************************
